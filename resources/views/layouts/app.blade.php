@@ -14,78 +14,97 @@
     @yield('link')
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    嚢囊
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<div id="app">
+    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                嚢囊
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
 
-                    </ul>
+                </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">登录</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">注册</a></li>
-                        @else
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item dropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <a href="{{ route('create') }}">写日记</a>
-                                </li>
-                            </ul>
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li><a class="nav-link" href="{{ route('login') }}">登录</a></li>
+                        <li><a class="nav-link" href="{{ route('register') }}">注册</a></li>
+                    @else
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </li>
+                        </ul>
 
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }}{{ Auth::user()->id }} <span class="caret"></span>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}<span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('daybook') }}">
+                                    创建日记薄
+                                </a>
+                                {{--<a class="dropdown-item" href="{{ route('daybook') }}">--}}
+                                    {{--我的日记本--}}
+                                {{--</a>--}}
+                                <a class="dropdown-item" href="{{ route('user') }}">
+                                    我的日记
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('create') }}">
-                                        我的日记本
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('user') }}">
-                                        个人信息
-                                    </a>
-                                    <a class="dropdown-item glyphicon glyphicon-cog" href="{{ route('perfectInformation') }}">
-                                        设置
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                <a class="dropdown-item glyphicon glyphicon-cog"
+                                   href="{{ route('perfectInformation') }}">
+                                    设置
+                                </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        登出
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                                    登出
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+    <main class="py-4">
+        @yield('content')
+    </main>
+    {{--<div class="row">--}}
+    {{--<div class="sidebar col-md-3">--}}
+    {{--<div class="sidebar-item">--}}
+    {{--<h1>03/07/2018</h1>--}}
+    {{--<h1>{{ $user->name }}</h1>--}}
+    {{--<a href=""><img src="{{ asset('img/b100192690.jpg') }}" alt=""></a>--}}
+    {{--<p style="margin-top:6px;">{{ $user->created_at }} &nbsp加入</p>--}}
+    {{--<p>{{ $user->description }}</p>--}}
+    {{--</div>--}}
+    {{--</div>--}}
+    {{--@section('right')--}}
+    {{--</div>--}}
+    <footer>
+        @yield('footer')
+    </footer>
+</div>
 
-        <footer>
-            @yield('footer')
-        </footer>
-    </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
 </body>
 </html>

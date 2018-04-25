@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use App\Daybook;
+use App\Repositories\UserRepository;
 
 class UserController extends Controller
 {
@@ -16,29 +16,22 @@ class UserController extends Controller
         });
     }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $user=$this->user;
-        // $query =user::where('email','=',$user->email)->firstOrFail();
-//        dd($user);
-
-        return view('user',[
-            'user'=>$user
+        $user = $this->user;
+        $daybook =Daybook::where('userid','=',$user->id)->get();
+//        $replaced = str_replace_first('the', 'a', 'the quick brown fox jumps over the lazy dog');
+//        $slug = str_slug('Laravel 5 Framework', '-');
+//        $adjusted = str_start('this/string', '/');
+//        $slice = str_after('This is my name', 'i');
+//        $a=$user->imgUrl;
+//        $url = route('details',['userid'=>1]);
+//        dd($url);
+//        dd($daybook->id);
+        return view('user', [
+            'user' => $user,
+            'daybook' => $daybook
         ]);
     }
 }

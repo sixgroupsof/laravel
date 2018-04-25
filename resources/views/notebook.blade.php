@@ -9,7 +9,8 @@
         <div class="row">
             <!-- 左边内容区域 -->
             <div class="col-md-8">
-                <h1 class="page-header">{{ $user->name }}的日记</h1>
+                <h1>《{{$daybook->thetheme}}》</h1>
+                <a class="btn action" href="{{route('update',['id'=>$daybook->id])}}">设置</a>
                 <div class="diarys">
                     <div class="diary">
                         <div class="body">
@@ -27,20 +28,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="notebooks">
-                    <h2 style="margin-bottom: 10px;">{{ $user->name }}的日记本</h2>
-                    @foreach($daybook as $dk)
-                        <div class="notebook col-md-3">
-                            <a href="{{route('details',['id'=>$dk->id])}}">
-                                <img src="~../../../{{ $dk->imgUrl }}" alt="" class="img-thumbnail"
-                                     style="width: 160px;height: 120px;">
-                                {{ $dk->thetheme }}
-                            </a>
-                            <p>{{ $dk->created_at }}&nbsp<br>{{$dk->expirationtime}}&nbsp
-                            </p>
-                        </div>
-                    @endforeach
-                </div>
             </div>
 
             <!-- 校园风 -->
@@ -50,13 +37,13 @@
 
             <!-- 右边内容区域 -->
             <div class="sidebar col-md-3">
-            <div class="sidebar-item">
-            <h1>03/07/2018</h1>
-            <h1>{{ $user->name }}</h1>
-            <a href=""><img src="{{ asset('img/b100192690.jpg') }}" alt=""></a>
-            <p style="margin-top:6px;">{{ $user->created_at }} &nbsp加入</p>
-            <p>{{ $user->description }}</p>
-            </div>
+                <div class="sidebar-item">
+                    <h1>03/07/2018</h1>
+                    <h1>{{ $user->name }}</h1>
+                    <a href=""><img src="{{ asset('img/b100192690.jpg') }}" alt=""></a>
+                    <p style="margin-top:6px;">{{ $user->created_at }} &nbsp加入</p>
+                    <p>{{ $user->description }}</p>
+                </div>
             </div>
         </div>
     </div>

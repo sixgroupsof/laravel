@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use app\User;
+//use app\Daybook;
 use Illuminate\Http\UploadedFile;
 use Storage;
 
@@ -24,6 +25,7 @@ class PerfectInformationController extends Controller
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             $this->user = $request->user();
+//            $this->daybook=$request->daybook();
             return $next($request);
         });
     }
