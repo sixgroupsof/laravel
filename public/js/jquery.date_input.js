@@ -1,4 +1,4 @@
-DateInput = (function($) { // Localise the $ function
+DateInput = (function ($) { // Localise the $ function
 
     function DateInput(el, opts) {
         if (typeof(opts) != "object") opts = {};
@@ -18,15 +18,19 @@ DateInput = (function($) { // Localise the $ function
         start_of_week: 1
     };
     DateInput.prototype = {
-        build: function() {
+        build: function () {
             var monthNav = $('<p class="month_nav">' +
                 '<span class="button prev" title="[Page-Up]">&#171;</span>' +
                 ' <span class="month_name"></span> ' +
                 '<span class="button next" title="[Page-Down]">&#187;</span>' +
                 '</p>');
             this.monthNameSpan = $(".month_name", monthNav);
-            $(".prev", monthNav).click(this.bindToObj(function() { this.moveMonthBy(-1); }));
-            $(".next", monthNav).click(this.bindToObj(function() { this.moveMonthBy(1); }));
+            $(".prev", monthNav).click(this.bindToObj(function () {
+                this.moveMonthBy(-1);
+            }));
+            $(".next", monthNav).click(this.bindToObj(function () {
+                this.moveMonthBy(1);
+            }));
 
             var yearNav = $('<p class="year_nav">' +
                 '<span class="button prev" title="[Ctrl+Page-Up]">&#171;</span>' +
@@ -34,13 +38,17 @@ DateInput = (function($) { // Localise the $ function
                 '<span class="button next" title="[Ctrl+Page-Down]">&#187;</span>' +
                 '</p>');
             this.yearNameSpan = $(".year_name", yearNav);
-            $(".prev", yearNav).click(this.bindToObj(function() { this.moveMonthBy(-12); }));
-            $(".next", yearNav).click(this.bindToObj(function() { this.moveMonthBy(12); }));
+            $(".prev", yearNav).click(this.bindToObj(function () {
+                this.moveMonthBy(-12);
+            }));
+            $(".next", yearNav).click(this.bindToObj(function () {
+                this.moveMonthBy(12);
+            }));
 
             var nav = $('<div class="nav"></div>').append(monthNav, yearNav);
 
             var tableShell = "<table><thead><tr>";
-            $(this.adjustDays(this.short_day_names)).each(function() {
+            $(this.adjustDays(this.short_day_names)).each(function () {
                 tableShell += "<th>" + this + "</th>";
             });
             tableShell += "</tr></thead><tbody></tbody></table>";
@@ -54,21 +62,28 @@ DateInput = (function($) { // Localise the $ function
                 this.rootLayers = this.rootLayers.add(this.ieframe);
 
                 // IE 6 only does :hover on A elements
-                $(".button", nav).mouseover(function() { $(this).addClass("hover") });
-                $(".button", nav).mouseout(function() { $(this).removeClass("hover") });
-            };
+                $(".button", nav).mouseover(function () {
+                    $(this).addClass("hover")
+                });
+                $(".button", nav).mouseout(function () {
+                    $(this).removeClass("hover")
+                });
+            }
+            ;
 
             this.tbody = $("tbody", this.dateSelector);
 
-            this.input.change(this.bindToObj(function() { this.selectDate(); }));
+            this.input.change(this.bindToObj(function () {
+                this.selectDate();
+            }));
             this.selectDate();
         },
 
-        selectMonth: function(date) {
+        selectMonth: function (date) {
             var newMonth = new Date(date.getFullYear(), date.getMonth(), 1);
 
             if (!this.currentMonth || !(this.currentMonth.getFullYear() == newMonth.getFullYear() &&
-                    this.currentMonth.getMonth() == newMonth.getMonth())) {
+                this.currentMonth.getMonth() == newMonth.getMonth())) {
                 // We have moved to a different month and so need to re-draw the table
                 this.currentMonth = newMonth;
 
@@ -87,25 +102,32 @@ DateInput = (function($) { // Localise the $ function
                         dayCells += '<td class="selectable_day" date="' + this.dateToString(currentDay) + '">' + currentDay.getDate() + '</td>';
                     } else {
                         dayCells += '<td class="unselected_month" date="' + this.dateToString(currentDay) + '">' + currentDay.getDate() + '</td>';
-                    };
+                    }
+                    ;
 
                     if (this.isLastDayOfWeek(currentDay)) dayCells += "</tr>";
-                };
+                }
+                ;
                 this.tbody.empty().append(dayCells);
 
                 // Write the month and year in the header
                 this.monthNameSpan.empty().append(this.monthName(date));
                 this.yearNameSpan.empty().append(this.currentMonth.getFullYear());
 
-                $(".selectable_day", this.tbody).click(this.bindToObj(function(event) {
+                $(".selectable_day", this.tbody).click(this.bindToObj(function (event) {
                     this.changeInput($(event.target).attr("date"));
                 }));
 
                 $("td[date=" + this.dateToString(new Date()) + "]", this.tbody).addClass("today");
 
-                $("td.selectable_day", this.tbody).mouseover(function() { $(this).addClass("hover") });
-                $("td.selectable_day", this.tbody).mouseout(function() { $(this).removeClass("hover") });
-            };
+                $("td.selectable_day", this.tbody).mouseover(function () {
+                    $(this).addClass("hover")
+                });
+                $("td.selectable_day", this.tbody).mouseout(function () {
+                    $(this).removeClass("hover")
+                });
+            }
+            ;
 
             $('.selected', this.tbody).removeClass("selected");
             $('td[date=' + this.selectedDateString + ']', this.tbody).addClass("selected");
@@ -114,10 +136,11 @@ DateInput = (function($) { // Localise the $ function
         // Select a particular date. If the date is not specified it is read from the input. If no date is
         // found then the current date is selected. The selectMonth() function is responsible for actually
         // selecting a particular date.
-        selectDate: function(date) {
+        selectDate: function (date) {
             if (typeof(date) == "undefined") {
                 date = this.stringToDate(this.input.val());
-            };
+            }
+            ;
             if (!date) date = new Date();
 
             this.selectedDate = date;
@@ -127,12 +150,12 @@ DateInput = (function($) { // Localise the $ function
 
         // Write a date string to the input and hide. Trigger the change event so we know to update the
         // selectedDate.
-        changeInput: function(dateString) {
+        changeInput: function (dateString) {
             this.input.val(dateString).change();
             this.hide();
         },
 
-        show: function() {
+        show: function () {
             this.rootLayers.css("display", "block");
             $([window, document.body]).click(this.hideIfClickOutside);
             this.input.unbind("focus", this.show);
@@ -140,7 +163,7 @@ DateInput = (function($) { // Localise the $ function
             this.setPosition();
         },
 
-        hide: function() {
+        hide: function () {
             this.rootLayers.css("display", "none");
             $([window, document.body]).unbind("click", this.hideIfClickOutside);
             this.input.focus(this.show);
@@ -148,14 +171,15 @@ DateInput = (function($) { // Localise the $ function
         },
 
         // We should hide the date selector if a click event happens outside of it
-        hideIfClickOutside: function(event) {
+        hideIfClickOutside: function (event) {
             if (event.target != this.input[0] && !this.insideSelector(event)) {
                 this.hide();
-            };
+            }
+            ;
         },
 
         // Returns true if the given event occurred inside the date selector
-        insideSelector: function(event) {
+        insideSelector: function (event) {
             var offset = this.dateSelector.position();
             offset.right = offset.left + this.dateSelector.outerWidth();
             offset.bottom = offset.top + this.dateSelector.outerHeight();
@@ -167,9 +191,8 @@ DateInput = (function($) { // Localise the $ function
         },
 
         // Respond to various different keyboard events
-        keydownHandler: function(event) {
-            switch (event.keyCode)
-            {
+        keydownHandler: function (event) {
+            switch (event.keyCode) {
                 case 9: // tab
                 case 27: // esc
                     this.hide();
@@ -202,20 +225,21 @@ DateInput = (function($) { // Localise the $ function
             event.preventDefault();
         },
 
-        stringToDate: function(string) {
+        stringToDate: function (string) {
             var matches;
             if (matches = string.match(/^(\d{1,2}) ([^\s]+) (\d{4,4})$/)) {
                 return new Date(matches[3], this.shortMonthNum(matches[2]), matches[1], 12, 00);
             } else {
                 return null;
-            };
+            }
+            ;
         },
 
-        dateToString: function(date) {
+        dateToString: function (date) {
             return date.getDate() + " " + this.short_month_names[date.getMonth()] + " " + date.getFullYear();
         },
 
-        setPosition: function() {
+        setPosition: function () {
             var offset = this.input.offset();
             this.rootLayers.css({
                 top: offset.top + this.input.outerHeight(),
@@ -227,11 +251,12 @@ DateInput = (function($) { // Localise the $ function
                     width: this.dateSelector.outerWidth(),
                     height: this.dateSelector.outerHeight()
                 });
-            };
+            }
+            ;
         },
 
         // Move the currently selected date by a particular number of days
-        moveDateBy: function(amount) {
+        moveDateBy: function (amount) {
             var newDate = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth(), this.selectedDate.getDate() + amount);
             this.selectDate(newDate);
         },
@@ -239,63 +264,68 @@ DateInput = (function($) { // Localise the $ function
         // Move the month of the currently selected date by a particular number of months. If we are moving
         // to a month which does not have enough days to represent the current day-of-month, then we
         // default to the last day of the month.
-        moveDateMonthBy: function(amount) {
+        moveDateMonthBy: function (amount) {
             var newDate = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth() + amount, this.selectedDate.getDate());
             if (newDate.getMonth() == this.selectedDate.getMonth() + amount + 1) {
                 // We have moved too far. For instance 31st March + 1 month = 1st May, not 30th April
                 newDate.setDate(0);
-            };
+            }
+            ;
             this.selectDate(newDate);
         },
 
         // Move the currently displayed month by a certain amount. This does *not* move the currently
         // selected date, so we end up viewing a month with no visibly selected date.
-        moveMonthBy: function(amount) {
+        moveMonthBy: function (amount) {
             var newMonth = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() + amount, this.currentMonth.getDate());
             this.selectMonth(newMonth);
         },
 
-        monthName: function(date) {
+        monthName: function (date) {
             return this.month_names[date.getMonth()];
         },
 
         // A hack to make "this" refer to this object instance when inside the given function
-        bindToObj: function(fn) {
+        bindToObj: function (fn) {
             var self = this;
-            return function() { return fn.apply(self, arguments) };
+            return function () {
+                return fn.apply(self, arguments)
+            };
         },
 
         // See above
-        bindMethodsToObj: function() {
+        bindMethodsToObj: function () {
             for (var i = 0; i < arguments.length; i++) {
                 this[arguments[i]] = this.bindToObj(this[arguments[i]]);
-            };
+            }
+            ;
         },
 
         // Finds out the array index of a particular value in that array
-        indexFor: function(array, value) {
+        indexFor: function (array, value) {
             for (var i = 0; i < array.length; i++) {
                 if (value == array[i]) return i;
-            };
+            }
+            ;
         },
 
         // Finds the number of a given month name
-        monthNum: function(month_name) {
+        monthNum: function (month_name) {
             return this.indexFor(this.month_names, month_name);
         },
 
         // Finds the number of a given short month name
-        shortMonthNum: function(month_name) {
+        shortMonthNum: function (month_name) {
             return this.indexFor(this.short_month_names, month_name);
         },
 
         // Finds the number of a given day name
-        shortDayNum: function(day_name) {
+        shortDayNum: function (day_name) {
             return this.indexFor(this.short_day_names, day_name);
         },
 
         // Works out the number of days between two dates
-        daysBetween: function(start, end) {
+        daysBetween: function (start, end) {
             start = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
             end = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate());
             return (end - start) / 86400000;
@@ -342,47 +372,52 @@ DateInput = (function($) { // Localise the $ function
 
                    difference = direction * (|currentDayNum - dayOfWeek - (direction * 7)| % 7)
         */
-        changeDayTo: function(dayOfWeek, date, direction) {
+        changeDayTo: function (dayOfWeek, date, direction) {
             var difference = direction * (Math.abs(date.getDay() - dayOfWeek - (direction * 7)) % 7);
             return new Date(date.getFullYear(), date.getMonth(), date.getDate() + difference);
         },
 
         // Given a date, return the day at the start of the week *before* this month
-        rangeStart: function(date) {
+        rangeStart: function (date) {
             return this.changeDayTo(this.start_of_week, new Date(date.getFullYear(), date.getMonth()), -1);
         },
 
         // Given a date, return the day at the end of the week *after* this month
-        rangeEnd: function(date) {
+        rangeEnd: function (date) {
             return this.changeDayTo((this.start_of_week - 1) % 7, new Date(date.getFullYear(), date.getMonth() + 1, 0), 1);
         },
 
         // Is the given date the first day of the week?
-        isFirstDayOfWeek: function(date) {
+        isFirstDayOfWeek: function (date) {
             return date.getDay() == this.start_of_week;
         },
 
         // Is the given date the last day of the week?
-        isLastDayOfWeek: function(date) {
+        isLastDayOfWeek: function (date) {
             return date.getDay() == (this.start_of_week - 1) % 7;
         },
 
         // Adjust a given array of day names to begin with the configured start-of-week
-        adjustDays: function(days) {
+        adjustDays: function (days) {
             var newDays = [];
             for (var i = 0; i < days.length; i++) {
                 newDays[i] = days[(i + this.start_of_week) % 7];
-            };
+            }
+            ;
             return newDays;
         }
     };
 
-    $.fn.date_input = function(opts) {
-        return this.each(function() { new DateInput(this, opts); });
+    $.fn.date_input = function (opts) {
+        return this.each(function () {
+            new DateInput(this, opts);
+        });
     };
-    $.date_input = { initialize: function(opts) {
+    $.date_input = {
+        initialize: function (opts) {
             $("input.date_input").date_input(opts);
-        } };
+        }
+    };
 
     return DateInput;
 })(jQuery); // End localisation of the $ function

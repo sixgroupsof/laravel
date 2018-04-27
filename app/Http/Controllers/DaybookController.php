@@ -35,18 +35,10 @@ class DaybookController extends Controller
         $daybook->thetheme = $data['thetheme'];
         $daybook->describe = $data['describe'];
         $daybook->expirationtime = $data['expirationtime'];
-//        $daybook->who =intval($data['who']);
         $daybook->who = (int)$data['who'];
-//        var_dump($daybook->who);
-//        exit;
+        $daybook->imgUrl='storage/app/public/default.jpg';
         $user = $this->user;
         $daybook->userid = $user->id;
-        $path = $res->file('daybookimgUrl')->store('public');
-        $daybook->imgUrl = asset('storage/app/public');
-        $replaced = str_replace_first('public//', '/', $path);
-        $adjusted = str_start($replaced, 'storage/app/');
-        $daybook->imgUrl = $adjusted;
-//        dd($path,$daybook->imgUrl,$replaced,$adjusted);
         if ($daybook->save()) {
             return redirect('user');
         } else {
@@ -65,8 +57,10 @@ class DaybookController extends Controller
             $adjusted = str_start($replaced, 'storage/app/');
             $daybook->imgUrl = $adjusted;
             dd($daybook->imgUrl);
+//            var_dump($daybook->imgUrl);
             $daybook->save();
         }
+//        dd($daybook->imgUrl);
         return view('cover', ['daybook' => $daybook]);
     }
 

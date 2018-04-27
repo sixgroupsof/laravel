@@ -1,19 +1,25 @@
 @extends('layouts.app')
 
 @section('link')
-    <link href="{{ asset('css/daybook.css') }}" rel="stylesheet">
-
+    {{--<link href="{{ asset('css/cover.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('css/covers.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fancybox.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
     <div id="page-main" class="container">
         <h1 class="page-header">设置《{{$daybook->thetheme}}》的封面</h1>
-        <form method="post" class="form-small" enctype="multipart/form-data">
+        <form action="{{route('upload',['id'=>$daybook->id])}}" method="post" class="form-small"
+              enctype="multipart/form-data">
+            @csrf
             <div class="err">
             </div>
             <label>当前封面</label>
             <p style="margin-bottom:10px;">
-                <img src="{{$daybook->imgUrl}}" alt="{{$daybook->thetheme}}">
+                <img src="~../../../{{ $daybook->imgUrl }}"
+                     alt="{{$daybook->thetheme}}"
+                >
+                {{--                <img src="{{ asset('img/voqgt8t3.jpg') }}" alt="">--}}
             </p>
             <label>新封面图片</label>
             <p></p>

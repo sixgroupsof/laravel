@@ -32,7 +32,7 @@
                     @foreach($daybook as $dk)
                         <div class="notebook col-md-3">
                             <a href="{{route('details',['id'=>$dk->id])}}">
-                                <img src="~../../../{{ $dk->imgUrl }}" alt="" class="img-thumbnail"
+                                <img src="~../../../{{$dk->imgUrl }}" alt="" class="img-thumbnail"
                                      style="width: 160px;height: 120px;">
                                 {{ $dk->thetheme }}
                             </a>

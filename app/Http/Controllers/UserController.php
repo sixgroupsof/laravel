@@ -28,7 +28,7 @@ class UserController extends Controller
 //        $a=$user->imgUrl;
 //        $url = route('details',['userid'=>1]);
 //        dd($url);
-//        dd($daybook->id);
+//        dd($daybook);
         return view('user', [
             'user' => $user,
             'daybook' => $daybook

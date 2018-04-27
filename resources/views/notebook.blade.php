@@ -2,6 +2,9 @@
 
 @section('link')
     <link href="{{ asset('css/user.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/covers.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fancybox.css') }}" rel="stylesheet">
+
 @endsection
 
 @section('content')
@@ -9,8 +12,8 @@
         <div class="row">
             <!-- 左边内容区域 -->
             <div class="col-md-8">
-                <h1>《{{$daybook->thetheme}}》</h1>
-                <a class="btn action" href="{{route('update',['id'=>$daybook->id])}}">设置</a>
+                <h1 class="page-header" style="float: left">《{{$daybook->thetheme}}》</h1>
+                <a class="btn action" style="margin-left: 580px" href="{{route('update',['id'=>$daybook->id])}}">设置</a>
                 <div class="diarys">
                     <div class="diary">
                         <div class="body">
@@ -50,5 +53,6 @@
 @endsection
 
 @section('footer')
-
+    <script src="{{asset('js/notebook.js')}}"></script>
+    <script src="{{asset('js/min.js')}}"></script>
 @endsection
