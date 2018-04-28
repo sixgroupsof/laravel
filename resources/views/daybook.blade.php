@@ -40,12 +40,14 @@
 
             }
 
-            /*#spd:hover::before{*/
-            /*content: attr(data-motherfucker);*/
+            /*.tip:hover::before {*/
+            /*content: attr(tip);*/
             /*background-color: #d9444a;*/
             /*color: white;*/
             /*position: absolute;*/
-            /*left:5%;*/
+            /*!*left:5%;*!*/
+            /*left: 356px;*/
+            /*top: 256.2px;*/
             /*}*/
         </style>
         <div id="page-main" class="container">
@@ -82,75 +84,7 @@
                     </p>
 
                     <label>过期时间</label>
-                    <input type="text" name="Daybook[expirationtime]" class="date_input" value="2018-05-27">
-                    <div class="date_selector" style="display: none;">
-                        <div class="nav"><p class="month_nav"><span class="button prev" title="[Page-Up]">«</span> <span
-                                        class="month_name">五月</span> <span class="button next"
-                                                                           title="[Page-Down]">»</span></p>
-                            <p class="year_nav"><span class="button prev" title="[Ctrl+Page-Up]">«</span> <span
-                                        class="year_name">2018</span> <span class="button next"
-                                                                            title="[Ctrl+Page-Down]">»</span></p></div>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>二</th>
-                                <th>三</th>
-                                <th>四</th>
-                                <th>五</th>
-                                <th>六</th>
-                                <th>日</th>
-                                <th>一</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="unselected_month" date="2018-04-30">30</td>
-                                <td class="selectable_day" date="2018-05-01">1</td>
-                                <td class="selectable_day" date="2018-05-02">2</td>
-                                <td class="selectable_day" date="2018-05-03">3</td>
-                                <td class="selectable_day" date="2018-05-04">4</td>
-                                <td class="selectable_day" date="2018-05-05">5</td>
-                                <td class="selectable_day" date="2018-05-06">6</td>
-                            </tr>
-                            <tr>
-                                <td class="selectable_day" date="2018-05-07">7</td>
-                                <td class="selectable_day" date="2018-05-08">8</td>
-                                <td class="selectable_day" date="2018-05-09">9</td>
-                                <td class="selectable_day" date="2018-05-10">10</td>
-                                <td class="selectable_day" date="2018-05-11">11</td>
-                                <td class="selectable_day" date="2018-05-12">12</td>
-                                <td class="selectable_day" date="2018-05-13">13</td>
-                            </tr>
-                            <tr>
-                                <td class="selectable_day" date="2018-05-14">14</td>
-                                <td class="selectable_day" date="2018-05-15">15</td>
-                                <td class="selectable_day" date="2018-05-16">16</td>
-                                <td class="selectable_day" date="2018-05-17">17</td>
-                                <td class="selectable_day" date="2018-05-18">18</td>
-                                <td class="selectable_day" date="2018-05-19">19</td>
-                                <td class="selectable_day" date="2018-05-20">20</td>
-                            </tr>
-                            <tr>
-                                <td class="selectable_day" date="2018-05-21">21</td>
-                                <td class="selectable_day" date="2018-05-22">22</td>
-                                <td class="selectable_day" date="2018-05-23">23</td>
-                                <td class="selectable_day" date="2018-05-24">24</td>
-                                <td class="selectable_day" date="2018-05-25">25</td>
-                                <td class="selectable_day" date="2018-05-26">26</td>
-                                <td class="selectable_day selected" date="2018-05-27">27</td>
-                            </tr>
-                            <tr>
-                                <td class="selectable_day" date="2018-05-28">28</td>
-                                <td class="selectable_day" date="2018-05-29">29</td>
-                                <td class="selectable_day" date="2018-05-30">30</td>
-                                <td class="selectable_day" date="2018-05-31">31</td>
-                                <td class="unselected_month" date="2018-06-01">1</td>
-                                <td class="unselected_month" date="2018-06-02">2</td>
-                                <td class="unselected_month" date="2018-06-03">3</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <input type="date" id="shfsStartDate" name="Daybook[expirationtime]" class="date_input" value="">
                     <a id="whats_expired" class="tip"
                        tip="给日记本设置一个完结日期，日记本完结后你才能浏览该日记本的所有日记，在此之前，每天凌晨零点，你写的日记将被隐藏，包括你自己在内任何人都无法浏览。">这是什么?
                         <div class="tooltip fixed" style="left: 356px; top: 256.2px; display: none;">
@@ -172,33 +106,34 @@
                 </form>
             </div>
         </div>
+
         {{--<script src="{{ asset('js/jquery.date_input.js') }}"></script>--}}
         {{--<script src="{{ asset('js/jquery.date_input.zh_CN.js') }}"></script>--}}
-        {{--<script src="{{ asset('js/jquery.simpletip-1.3.1.min.js') }}"></script>--}}
-        {{--<script type="text/javascript">--}}
-            {{--$($.date_input.initialize);--}}
-            {{--$.extend(DateInput.DEFAULT_OPTS, {--}}
-                {{--stringToDate: function (string) {--}}
-                    {{--var matches;--}}
-                    {{--if (matches = string.match(/^(\d{4,4})-(\d{2,2})-(\d{2,2})$/)) {--}}
-                        {{--return new Date(matches[1], matches[2] - 1, matches[3]);--}}
-                    {{--} else {--}}
-                        {{--return null;--}}
-                    {{--}--}}
-                {{--},--}}
+        <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
+        <script src="{{ asset('js/jquery.simpletip-1.3.1.min.js') }}"></script>
+        <script type="text/javascript">
+            window.onload = function () {
+                var date = new Date();
+                // 获取当前年份
+                var year = date.getFullYear();
+                //获取当前月份 0-11 0对应1月
+                var month = date.getMonth() + 2;
+                //获取当前日期
+                var day = date.getDate();
+                //格式为"yyyy-MM-dd" 需做处理
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                if (day < 10) {
+                    day = "0" + day;
+                }
+                $("#shfsStartDate").val(year + "-" + month + "-" + day);
+            }
 
-                {{--dateToString: function (date) {--}}
-                    {{--var month = (date.getMonth() + 1).toString();--}}
-                    {{--var dom = date.getDate().toString();--}}
-                    {{--if (month.length == 1) month = "0" + month;--}}
-                    {{--if (dom.length == 1) dom = "0" + dom;--}}
-                    {{--return date.getFullYear() + "-" + month + "-" + dom;--}}
-                {{--}--}}
-            {{--});--}}
-
-            {{--var $expTip = $('#whats_expired');--}}
-            {{--$expTip.simpletip({content: $expTip.attr('tip'), fixed: true, position: 'right'});--}}
-        {{--</script>--}}
+            var $expTip = $('#whats_expired');
+            console.log($expTip);
+            //$expTip.simpletip({ content:$expTip.attr('tip'), fixed: true, position: 'right' });
+        </script>
     </div>
 @endsection
 

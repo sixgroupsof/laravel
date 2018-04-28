@@ -16,10 +16,7 @@
             </div>
             <label>当前封面</label>
             <p style="margin-bottom:10px;">
-                <img src="~../../../{{ $daybook->imgUrl }}"
-                     alt="{{$daybook->thetheme}}"
-                >
-                {{--                <img src="{{ asset('img/voqgt8t3.jpg') }}" alt="">--}}
+                <img src="../../../{{ $daybook->imgUrl }}" alt="{{$daybook->thetheme}}" style="width: 160px;height: 120px;margin-bottom: 10px">
             </p>
             <label>新封面图片</label>
             <p></p>
