@@ -8,7 +8,7 @@
 @section('content')
     <div id="page-main" class="container">
         <link rel="stylesheet" href="{{ asset('css/date_input.css') }}" type="text/css">
-        <style type="text/css">
+        <style>
             .tip {
                 cursor: help;
                 padding: 9px;
@@ -41,13 +41,13 @@
             }
 
             /*.tip:hover::before {*/
-            /*content: attr(tip);*/
-            /*background-color: #d9444a;*/
-            /*color: white;*/
-            /*position: absolute;*/
-            /*!*left:5%;*!*/
-            /*left: 356px;*/
-            /*top: 256.2px;*/
+                /*content: attr(tip);*/
+                /*background-color: #d9444a;*/
+                /*color: white;*/
+                /*position: absolute;*/
+                /*!*left:5%;*!*/
+                /*left: 356px;*/
+                /*top: 256.2px;*/
             /*}*/
         </style>
         <div id="page-main" class="container">
@@ -131,8 +131,8 @@
             }
 
             var $expTip = $('#whats_expired');
-            console.log($expTip);
-            //$expTip.simpletip({ content:$expTip.attr('tip'), fixed: true, position: 'right' });
+            // console.log($expTip);
+            $expTip.simpletip({ content:$expTip.attr('tip'), fixed: true, position: 'right' });
         </script>
     </div>
 @endsection

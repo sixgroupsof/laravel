@@ -11,6 +11,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .top {
+            float: right;
+            padding: 0 5px;
+            color: #fff;
+            text-decoration: none;
+            background-color: #789;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
     @yield('link')
 </head>
 <body>
@@ -55,7 +67,7 @@
                                     创建日记薄
                                 </a>
                                 {{--<a class="dropdown-item" href="{{ route('daybook') }}">--}}
-                                    {{--我的日记本--}}
+                                {{--我的日记本--}}
                                 {{--</a>--}}
                                 <a class="dropdown-item" href="{{ route('user') }}">
                                     我的日记
@@ -82,24 +94,11 @@
         </div>
     </nav>
 
-    <main class="py-4">
-        @yield('content')
-    </main>
-    {{--<div class="row">--}}
-    {{--<div class="sidebar col-md-3">--}}
-    {{--<div class="sidebar-item">--}}
-    {{--<h1>03/07/2018</h1>--}}
-    {{--<h1>{{ $user->name }}</h1>--}}
-    {{--<a href=""><img src="{{ asset('img/b100192690.jpg') }}" alt=""></a>--}}
-    {{--<p style="margin-top:6px;">{{ $user->created_at }} &nbsp加入</p>--}}
-    {{--<p>{{ $user->description }}</p>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--@section('right')--}}
-    {{--</div>--}}
-    <footer>
-        @yield('footer')
-    </footer>
+
+    @yield('content')
+    <a class="top" href="javascript:scroll(0,0)">Top</a>
+    @yield('footer')
+
 </div>
 
 <!-- Scripts -->
